@@ -1,0 +1,17 @@
+CREATE TABLE dept003 (
+  Dno       NUMBER(2) PRIMARY KEY 
+            CHECK (Dno IN (10, 20, 30, 40, 50, 60)),
+
+  Dname     VARCHAR2(10) UNIQUE NOT NULL 
+            CHECK (Dname = UPPER(Dname)),
+
+  Dlocation VARCHAR2(10) NOT NULL 
+            CHECK (Dlocation = UPPER(Dlocation))
+);
+
+ desc dept003
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL NUMBER(2)
+ DNAME                                     NOT NULL VARCHAR2(10)
+ DLOCATION                                 NOT NULL VARCHAR2(10)
