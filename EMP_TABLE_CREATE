@@ -1,0 +1,35 @@
+CREATE TABLE emp003 (
+  Empno   NUMBER(4) PRIMARY KEY 
+          CHECK (Empno BETWEEN 7000 AND 7999),
+
+  Ename   VARCHAR2(20) NOT NULL 
+          CHECK (Ename = UPPER(Ename)),
+
+  Job     VARCHAR2(15) NOT NULL,
+
+  Mgr     NUMBER(4),
+  
+  HireDate DATE NOT NULL,
+
+  Salary  NUMBER(5) DEFAULT 0,
+
+  Comm    NUMBER(5),
+
+  Deptno  NUMBER(2) DEFAULT 10,
+  
+  CONSTRAINT fk_mgr FOREIGN KEY (Mgr) REFERENCES emp1_xx (Empno),
+  CONSTRAINT fk_dept FOREIGN KEY (Deptno) REFERENCES dept1_xx (Dno)
+);
+
+
+ desc emp003
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                     NOT NULL VARCHAR2(20)
+ JOB                                       NOT NULL VARCHAR2(15)
+ MGR                                                NUMBER(4)
+ HIREDATE                                  NOT NULL DATE
+ SALARY                                             NUMBER(5)
+ COMM                                               NUMBER(5)
+ DEPTNO                                             NUMBER(2)
