@@ -33,3 +33,17 @@ CREATE TABLE emp003 (
  SALARY                                             NUMBER(5)
  COMM                                               NUMBER(5)
  DEPTNO                                             NUMBER(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
