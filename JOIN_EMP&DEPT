@@ -277,8 +277,8 @@ HRD              1300
 OPERATION
 
 
-//SELF JOIN//
 
+//SELF JOIN//
 
 
         ID NAME                 ADDRESS              CONTACT                     AGE
@@ -294,4 +294,3 @@ NAME                 ADDRESS              CONTACT
 -------------------- -------------------- --------------------
 Soumen               Mednipur             2292920
 Sohom                Howrah               92920
-  
