@@ -1,0 +1,296 @@
+
+//EQUI JOIN//
+
+SQL> select Ename,job,dlocation from emp003, dept003 where emp003.deptno=dept003.dno;
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+SMITH                CLERK           DALLAS
+ALLEN                SALESMAN        CHICAGO
+WARD                 SALEAMAN        CHICAGO
+JOHNES               MANAGER         DALLAS
+MARTI                SALESMAN        CHICAGO
+BLAKE                MANAGER         CHICAGO
+CLARK                MANAGER         HOUSTON
+SCOTT                ANALYST         DALLAS
+KING                 PRESIDENT       HOUSTON
+TURN                 SALESMAN        CHICAGO
+ADAM                 CLERK           DALLAS
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+JAMES                CLERK           CHICAGO
+FORD                 ANALYST         DALLAS
+MILLE                CLERK           HOUSTON
+
+
+
+//NON-EQUI JOIN//
+
+
+
+SQL> select Ename,job,dlocation from emp003, dept003 where emp003.deptno<dept003.dno;
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+BLAKE                MANAGER         BOSTON
+TURN                 SALESMAN        BOSTON
+ALLEN                SALESMAN        BOSTON
+MARTI                SALESMAN        BOSTON
+WARD                 SALEAMAN        BOSTON
+JAMES                CLERK           BOSTON
+SCOTT                ANALYST         BOSTON
+JOHNES               MANAGER         BOSTON
+SMITH                CLERK           BOSTON
+ADAM                 CLERK           BOSTON
+FORD                 ANALYST         BOSTON
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+KING                 PRESIDENT       BOSTON
+MILLE                CLERK           BOSTON
+CLARK                MANAGER         BOSTON
+SCOTT                ANALYST         CHICAGO
+JOHNES               MANAGER         CHICAGO
+SMITH                CLERK           CHICAGO
+ADAM                 CLERK           CHICAGO
+FORD                 ANALYST         CHICAGO
+KING                 PRESIDENT       CHICAGO
+MILLE                CLERK           CHICAGO
+CLARK                MANAGER         CHICAGO
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+KING                 PRESIDENT       DALLAS
+MILLE                CLERK           DALLAS
+CLARK                MANAGER         DALLAS
+
+
+
+//NATURAL JOIN//
+
+SQL> ALTER TABLE emp003 RENAME COLUMN deptno TO dno;
+
+SQL> select ename,job,dlocation from emp003 NATURAL JOIN dept003;
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+SMITH                CLERK           DALLAS
+ALLEN                SALESMAN        CHICAGO
+WARD                 SALEAMAN        CHICAGO
+JOHNES               MANAGER         DALLAS
+MARTI                SALESMAN        CHICAGO
+BLAKE                MANAGER         CHICAGO
+CLARK                MANAGER         HOUSTON
+SCOTT                ANALYST         DALLAS
+KING                 PRESIDENT       HOUSTON
+TURN                 SALESMAN        CHICAGO
+ADAM                 CLERK           DALLAS
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+JAMES                CLERK           CHICAGO
+FORD                 ANALYST         DALLAS
+MILLE                CLERK           HOUSTON
+
+
+//INNER JOIN//
+
+SQL> select ename,job,dlocation from emp003 inner join dept003 on emp003.deptno=dept003.dno;
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+SMITH                CLERK           DALLAS
+ALLEN                SALESMAN        CHICAGO
+WARD                 SALEAMAN        CHICAGO
+JOHNES               MANAGER         DALLAS
+MARTI                SALESMAN        CHICAGO
+BLAKE                MANAGER         CHICAGO
+CLARK                MANAGER         HOUSTON
+SCOTT                ANALYST         DALLAS
+KING                 PRESIDENT       HOUSTON
+TURN                 SALESMAN        CHICAGO
+ADAM                 CLERK           DALLAS
+
+ENAME                JOB             DLOCATION
+-------------------- --------------- ----------
+JAMES                CLERK           CHICAGO
+FORD                 ANALYST         DALLAS
+MILLE                CLERK           HOUSTON
+
+//CROSS JOIN//
+
+SQL> select ename,dlocation from emp003 cross join dept003;
+
+ENAME                DLOCATION
+-------------------- ----------
+SMITH                HOUSTON
+ALLEN                HOUSTON
+WARD                 HOUSTON
+JOHNES               HOUSTON
+MARTI                HOUSTON
+BLAKE                HOUSTON
+CLARK                HOUSTON
+SCOTT                HOUSTON
+KING                 HOUSTON
+TURN                 HOUSTON
+ADAM                 HOUSTON
+
+ENAME                DLOCATION
+-------------------- ----------
+JAMES                HOUSTON
+FORD                 HOUSTON
+MILLE                HOUSTON
+SMITH                DALLAS
+ALLEN                DALLAS
+WARD                 DALLAS
+JOHNES               DALLAS
+MARTI                DALLAS
+BLAKE                DALLAS
+CLARK                DALLAS
+SCOTT                DALLAS
+
+ENAME                DLOCATION
+-------------------- ----------
+KING                 DALLAS
+TURN                 DALLAS
+ADAM                 DALLAS
+JAMES                DALLAS
+FORD                 DALLAS
+MILLE                DALLAS
+SMITH                CHICAGO
+ALLEN                CHICAGO
+WARD                 CHICAGO
+JOHNES               CHICAGO
+MARTI                CHICAGO
+
+ENAME                DLOCATION
+-------------------- ----------
+BLAKE                CHICAGO
+CLARK                CHICAGO
+SCOTT                CHICAGO
+KING                 CHICAGO
+TURN                 CHICAGO
+ADAM                 CHICAGO
+JAMES                CHICAGO
+FORD                 CHICAGO
+MILLE                CHICAGO
+SMITH                BOSTON
+ALLEN                BOSTON
+
+ENAME                DLOCATION
+-------------------- ----------
+WARD                 BOSTON
+JOHNES               BOSTON
+MARTI                BOSTON
+BLAKE                BOSTON
+CLARK                BOSTON
+SCOTT                BOSTON
+KING                 BOSTON
+TURN                 BOSTON
+ADAM                 BOSTON
+JAMES                BOSTON
+FORD                 BOSTON
+
+ENAME                DLOCATION
+-------------------- ----------
+MILLE                BOSTON
+
+
+//LEFT OUTER JOIN//
+
+SQL> select Dname,salary,comm from dept003 left outer join emp003 on(dept003.dno=emp003.deptno);
+
+DNAME          SALARY       COMM
+---------- ---------- ----------
+RESEARCH         1000
+SALES            1600        300
+SALES            1250        500
+RESEARCH         2975
+SALES            1250       1400
+SALES            2850
+HRD              2450
+RESEARCH         3000
+HRD              5000
+SALES            1500          0
+RESEARCH         1100
+
+DNAME          SALARY       COMM
+---------- ---------- ----------
+SALES             950
+RESEARCH         3000
+HRD              1300
+OPERATION
+
+
+//RIGHT OUTER JOIN//
+
+
+SQL> select Dname,salary,comm from dept003 right outer join emp003 on(dept003.dno=emp003.deptno);
+
+DNAME          SALARY       COMM
+---------- ---------- ----------
+HRD              1300
+HRD              5000
+HRD              2450
+RESEARCH         3000
+RESEARCH         1100
+RESEARCH         3000
+RESEARCH         2975
+RESEARCH         1000
+SALES             950
+SALES            1500          0
+SALES            2850
+
+DNAME          SALARY       COMM
+---------- ---------- ----------
+SALES            1250       1400
+SALES            1250        500
+SALES            1600        300
+
+
+
+//FULL OUTER JOIN//
+
+
+SQL> select Dname,salary,comm from dept003 full outer join emp003 on(dept003.dno=emp003.deptno);
+
+DNAME          SALARY       COMM
+---------- ---------- ----------
+RESEARCH         1000
+SALES            1600        300
+SALES            1250        500
+RESEARCH         2975
+SALES            1250       1400
+SALES            2850
+HRD              2450
+RESEARCH         3000
+HRD              5000
+SALES            1500          0
+RESEARCH         1100
+
+DNAME          SALARY       COMM
+---------- ---------- ----------
+SALES             950
+RESEARCH         3000
+HRD              1300
+OPERATION
+
+
+//SELF JOIN//
+
+
+
+        ID NAME                 ADDRESS              CONTACT                     AGE
+---------- -------------------- -------------------- -------------------- ----------
+        10 Tirtha               Bagnan               2292920                      20
+        20 Soumen               Mednipur             92920                        30
+        30 Sohom                Howrah               332920
+        40 sona                 kolkata              2920                         60
+
+SQL> select p1.name,p1.address,p2.contact from personal p1,personal p2 where p1.id=p2.age;
+
+NAME                 ADDRESS              CONTACT
+-------------------- -------------------- --------------------
+Soumen               Mednipur             2292920
+Sohom                Howrah               92920
